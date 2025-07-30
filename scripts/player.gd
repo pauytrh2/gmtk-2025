@@ -1,29 +1,28 @@
 extends CharacterBody2D
 
 @export var planet_center: Vector2
-@export var planet_radius := 100.0  # Set to your planet’s radius
-@export var player_height := 16.0   # Distance from player center to feet, adjust as needed
-@export var move_speed := 150.0
+@export var planet_radius := 120
+@export var player_height := 70
+@export var move_speed := 200
+
+var facing_left := false  
 
 func _physics_process(delta):
-    # Vector from planet center to player
     var to_player = global_position - planet_center
-    var dist = to_player.length()
-
-    # Normalize direction from center to player (surface normal)
     var normal = to_player.normalized()
 
-    # Stick the player exactly to the surface (radius + player "foot" offset)
     global_position = planet_center + normal * (planet_radius + player_height)
 
-    # Align rotation: face "away" from planet center
     rotation = normal.angle() + PI / 2
 
-    # Movement input along the tangent
-    var input_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+    var tangent = Vector2(normal.y, -normal.x) if facing_left else Vector2(-normal.y, normal.x)
 
-    # Tangent vector (90 degrees rotated from normal)
-    var tangent = Vector2(-normal.y, normal.x)
+    global_position += tangent * move_speed * delta
 
-    # Move player position along tangent
-    global_position += tangent * input_dir * move_speed * delta
+    if Input.is_action_just_pressed("ui_accept"):
+        slash()
+
+func slash():
+    facing_left = !facing_left
+    $AnimatedSprite2D.flip_h = facing_left
+    print("Slash! Facing left:", facing_left)
