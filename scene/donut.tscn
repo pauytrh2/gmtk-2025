@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b84cnod4v2105"]
+
+[ext_resource type="Texture2D" uid="uid://bsvhqnnw1o645" path="res://assets/donut.png" id="1_qwybg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qwybg"]
+radius = 120.0
+
+[node name="Donut" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.42109e-14)
+scale = Vector2(0.144196, 0.15036)
+texture = ExtResource("1_qwybg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qwybg")

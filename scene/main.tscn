@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://h7usaqgy2jk6"]
+
+[ext_resource type="PackedScene" uid="uid://b84cnod4v2105" path="res://scene/donut.tscn" id="1_itxqv"]
+[ext_resource type="PackedScene" uid="uid://13ypau7ceaf1" path="res://scene/player.tscn" id="2_v0l8b"]
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("2_v0l8b")]
+z_index = 1
+position = Vector2(574, 44)
+planet_center = Vector2(600, 325)
+planet_radius = 120.0
+player_height = 70.0
+
+[node name="Donut" parent="." instance=ExtResource("1_itxqv")]
+position = Vector2(600, 325)
