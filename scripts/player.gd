@@ -25,4 +25,4 @@ func _physics_process(delta):
 func slash():
     facing_left = !facing_left
     $AnimatedSprite2D.flip_h = facing_left
-    print("Slash! Facing left:", facing_left)
+    print("Slash! Facing left: ", facing_left)
