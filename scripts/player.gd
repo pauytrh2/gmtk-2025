@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var planet_center: Vector2
 @export var planet_radius := 120
 @export var player_height := 70
-@export var move_speed := 200
 
 var facing_left := false
 var is_slashing := false
@@ -28,7 +27,7 @@ func _physics_process(delta) -> void:
 
     var tangent = Vector2(normal.y, -normal.x) if facing_left else Vector2(-normal.y, normal.x)
 
-    global_position += tangent * move_speed * delta
+    global_position += tangent * Globals.player_speed * delta
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
     if area.is_in_group("enemies"):
@@ -59,6 +58,7 @@ func play_attack_animation() -> void:
     $AnimatedSprite2D.play("walk")
 
 func die() -> void:
+    Globals.player_speed = 200
     Globals.score = 0
     score_label.text = str(Globals.score)
     
