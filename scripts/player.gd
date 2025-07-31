@@ -5,9 +5,16 @@ extends CharacterBody2D
 @export var player_height := 70
 @export var move_speed := 200
 
-var facing_left := false  
+var facing_left := false
+var is_slashing := false
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:    
+    if is_slashing:
+        return
+
+    if Input.is_action_just_pressed("ui_accept"):
+        slash()
+
     var to_player = global_position - planet_center
     var normal = to_player.normalized()
 
@@ -19,10 +26,21 @@ func _physics_process(delta):
 
     global_position += tangent * move_speed * delta
 
-    if Input.is_action_just_pressed("ui_accept"):
-        slash()
+func slash() -> void:
+    is_slashing = true
+    await get_tree().process_frame
 
-func slash():
+    for area in $AttackArea.get_overlapping_areas():
+        print(area.name)
+        if area.is_in_group("enemies"):
+            print("Hit enemy!")
+            area.die()
+
+    $AnimatedSprite2D.play("attack")
+    await $AnimatedSprite2D.animation_finished
+    $AnimatedSprite2D.play("walk")
+
     facing_left = !facing_left
     $AnimatedSprite2D.flip_h = facing_left
-    print("Slash! Facing left: ", facing_left)
+
+    is_slashing = false

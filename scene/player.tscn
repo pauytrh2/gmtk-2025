@@ -1,10 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://13ypau7ceaf1"]
+[gd_scene load_steps=16 format=3 uid="uid://13ypau7ceaf1"]
 
 [ext_resource type="Script" uid="uid://c6k2xs1gcj8p6" path="res://scripts/player.gd" id="1_hjaqi"]
+[ext_resource type="Texture2D" uid="uid://dqcvtwglu37nl" path="res://assets/player_attack.png" id="2_fvtld"]
 [ext_resource type="Texture2D" uid="uid://clgiahhejbl2r" path="res://assets/player.png" id="2_hjaqi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s4jxa"]
 radius = 8.22791
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml7e8"]
+atlas = ExtResource("2_fvtld")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihjo1"]
+atlas = ExtResource("2_fvtld")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk1vr"]
+atlas = ExtResource("2_fvtld")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvtld"]
 atlas = ExtResource("2_hjaqi")
@@ -34,6 +47,20 @@ region = Rect2(160, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ml7e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihjo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk1vr")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fvtld")
 }, {
 "duration": 1.0,
@@ -53,8 +80,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 6.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvtld"]
+size = Vector2(5, 10)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_hjaqi")
@@ -69,6 +99,14 @@ shape = SubResource("CapsuleShape2D_s4jxa")
 texture_filter = 1
 scale = Vector2(0.546919, 0.546919)
 sprite_frames = SubResource("SpriteFrames_itxqv")
-animation = &"walk"
+animation = &"attack"
 autoplay = "walk"
-frame = 5
+frame = 2
+frame_progress = 1.0
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(6.5, 2)
+shape = SubResource("RectangleShape2D_fvtld")
+debug_color = Color(0.7, 0, 0, 0.419608)
