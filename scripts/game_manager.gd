@@ -9,7 +9,7 @@ func _on_enemy_killed() -> void:
     spawn_enemy()
 
 func _on_area_entered(area: Area2D) -> void:
-    
+    print(area.name)
 
 func spawn_enemy() -> void:
     var enemy_instance = enemy_scene.instantiate()

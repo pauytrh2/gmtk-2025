@@ -32,12 +32,6 @@ func slash() -> void:
 
     kill_enemies()
 
-    $AnimatedSprite2D.play("attack")
-    await $AnimatedSprite2D.animation_finished
-    $AnimatedSprite2D.play("walk")
-
-    flip()
-
     is_slashing = false
 
 func flip() -> void:
@@ -47,6 +41,11 @@ func flip() -> void:
 
 func kill_enemies() -> void:
     for area in $AttackArea.get_overlapping_areas():
-        print(area.name)
         if area.is_in_group("enemies"):
             area.die()
+
+            flip()
+
+            $AnimatedSprite2D.play("attack")
+            await $AnimatedSprite2D.animation_finished
+            $AnimatedSprite2D.play("walk")
