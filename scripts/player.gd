@@ -1,22 +1,25 @@
 extends CharacterBody2D
 
+signal killed
+
 @export var planet_center: Vector2
 @export var planet_radius := 120
 @export var player_height := 70
 @export var move_speed := 200
-@export var attack_cooldown := 1
 
 var facing_left := false
 var is_slashing := false
-var can_attack := true
 
 const ATTACK_OFFSET := 14
 
-func _physics_process(delta) -> void:    
+func _start() -> void:
+    show()
+
+func _physics_process(delta) -> void:
     if is_slashing:
         return
 
-    if Input.is_action_just_pressed("slash") and can_attack:
+    if Input.is_action_just_pressed("slash"):
         slash()
 
     var to_player = global_position - planet_center
@@ -30,17 +33,17 @@ func _physics_process(delta) -> void:
 
     global_position += tangent * move_speed * delta
 
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+    if area.is_in_group("enemies"):
+        die()
+
 func slash() -> void:
     is_slashing = true
-    can_attack = false
 
     kill_enemies()
     await play_attack_animation()
 
     is_slashing = false
-
-    await get_tree().create_timer(attack_cooldown).timeout
-    can_attack = true
 
 func flip() -> void:
     facing_left = !facing_left
@@ -57,3 +60,7 @@ func play_attack_animation() -> void:
     $AnimatedSprite2D.play("attack")
     await $AnimatedSprite2D.animation_finished
     $AnimatedSprite2D.play("walk")
+
+func die() -> void:
+    hide()
+    emit_signal("killed")
