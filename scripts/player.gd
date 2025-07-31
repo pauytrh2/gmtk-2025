@@ -4,16 +4,19 @@ extends CharacterBody2D
 @export var planet_radius := 120
 @export var player_height := 70
 @export var move_speed := 200
+@export var attack_cooldown := 1
 
 var facing_left := false
 var is_slashing := false
+var can_attack := true
+
 const ATTACK_OFFSET := 14
 
 func _physics_process(delta) -> void:    
     if is_slashing:
         return
 
-    if Input.is_action_just_pressed("slash"):
+    if Input.is_action_just_pressed("slash") and can_attack:
         slash()
 
     var to_player = global_position - planet_center
@@ -29,10 +32,15 @@ func _physics_process(delta) -> void:
 
 func slash() -> void:
     is_slashing = true
+    can_attack = false
 
     kill_enemies()
+    await play_attack_animation()
 
     is_slashing = false
+
+    await get_tree().create_timer(attack_cooldown).timeout
+    can_attack = true
 
 func flip() -> void:
     facing_left = !facing_left
@@ -43,9 +51,9 @@ func kill_enemies() -> void:
     for area in $AttackArea.get_overlapping_areas():
         if area.is_in_group("enemies"):
             area.die()
-
             flip()
 
-            $AnimatedSprite2D.play("attack")
-            await $AnimatedSprite2D.animation_finished
-            $AnimatedSprite2D.play("walk")
+func play_attack_animation() -> void:
+    $AnimatedSprite2D.play("attack")
+    await $AnimatedSprite2D.animation_finished
+    $AnimatedSprite2D.play("walk")
