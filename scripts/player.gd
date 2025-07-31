@@ -7,12 +7,13 @@ extends CharacterBody2D
 
 var facing_left := false
 var is_slashing := false
+const ATTACK_OFFSET := 14
 
 func _physics_process(delta) -> void:    
     if is_slashing:
         return
 
-    if Input.is_action_just_pressed("ui_accept"):
+    if Input.is_action_just_pressed("slash"):
         slash()
 
     var to_player = global_position - planet_center
@@ -28,19 +29,24 @@ func _physics_process(delta) -> void:
 
 func slash() -> void:
     is_slashing = true
-    await get_tree().process_frame
 
-    for area in $AttackArea.get_overlapping_areas():
-        print(area.name)
-        if area.is_in_group("enemies"):
-            print("Hit enemy!")
-            area.die()
+    kill_enemies()
 
     $AnimatedSprite2D.play("attack")
     await $AnimatedSprite2D.animation_finished
     $AnimatedSprite2D.play("walk")
 
-    facing_left = !facing_left
-    $AnimatedSprite2D.flip_h = facing_left
+    flip()
 
     is_slashing = false
+
+func flip() -> void:
+    facing_left = !facing_left
+    $AnimatedSprite2D.flip_h = facing_left
+    $AttackArea.position = Vector2(-ATTACK_OFFSET, 0) if facing_left else Vector2.ZERO
+
+func kill_enemies() -> void:
+    for area in $AttackArea.get_overlapping_areas():
+        print(area.name)
+        if area.is_in_group("enemies"):
+            area.die()
