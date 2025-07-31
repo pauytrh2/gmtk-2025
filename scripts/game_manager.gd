@@ -9,7 +9,6 @@ func _on_enemy_killed() -> void:
     spawn_enemy()
 
 func _on_area_entered(area: Area2D) -> void:
-    print(area.name, ": ", area.is_in_group("player"))
     
 
 func spawn_enemy() -> void:

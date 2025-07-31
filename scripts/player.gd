@@ -9,9 +9,6 @@ var facing_left := false
 var is_slashing := false
 const ATTACK_OFFSET := 14
 
-#func _ready() -> void:
-    #add_to_group("player")
-
 func _physics_process(delta) -> void:    
     if is_slashing:
         return
