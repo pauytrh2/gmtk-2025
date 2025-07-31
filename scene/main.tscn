@@ -12,7 +12,8 @@
 position = Vector2(600, 325)
 
 [node name="Player" parent="GameObjects" instance=ExtResource("2_v0l8b")]
-position = Vector2(600, 126)
+unique_name_in_owner = true
+position = Vector2(600, 125)
 scale = Vector2(7.2, 8.26256)
 planet_center = Vector2(600, 325)
 
@@ -41,5 +42,3 @@ vertical_alignment = 1
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("4_brvut")
-
-[connection signal="killed" from="GameObjects/Player" to="GameManager" method="_on_player_killed"]

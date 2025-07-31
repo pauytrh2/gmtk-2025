@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal killed
+@onready var score_label: Label = %Score
 
 @export var planet_center: Vector2
 @export var planet_radius := 120
@@ -11,9 +11,6 @@ var facing_left := false
 var is_slashing := false
 
 const ATTACK_OFFSET := 14
-
-func _start() -> void:
-    show()
 
 func _physics_process(delta) -> void:
     if is_slashing:
@@ -62,5 +59,8 @@ func play_attack_animation() -> void:
     $AnimatedSprite2D.play("walk")
 
 func die() -> void:
-    hide()
-    emit_signal("killed")
+    Globals.score = 0
+    score_label.text = str(Globals.score)
+    
+    position.x = 600
+    position.y = 125
