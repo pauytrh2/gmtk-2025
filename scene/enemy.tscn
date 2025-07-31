@@ -66,7 +66,7 @@ radius = 7.07107
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_f87vc")
 planet_center = Vector2(600, 325)
-enemy_height = 30
+enemy_height = 36
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -74,7 +74,7 @@ scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_vufel")
 animation = &"jump"
 autoplay = "jump"
-frame_progress = 0.491601
+frame_progress = 0.62761
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(5, 5)
