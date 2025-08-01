@@ -1,6 +1,7 @@
 extends Node
 
 @onready var score_label: Label = %Score
+@onready var player: CharacterBody2D = %Player
 
 var enemy_scene := preload("res://scene/enemy.tscn")
 
@@ -19,4 +20,5 @@ func spawn_enemy() -> void:
     var enemy_instance = enemy_scene.instantiate()
     enemy_instance.add_to_group("enemies")
     enemy_instance.killed.connect(_on_enemy_killed)
+    enemy_instance.player = player
     add_child(enemy_instance)
