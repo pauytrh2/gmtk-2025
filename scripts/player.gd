@@ -14,20 +14,10 @@ const ATTACK_OFFSET := 14
 func _physics_process(delta) -> void:
     if is_slashing:
         return
-
     if Input.is_action_just_pressed("slash"):
         slash()
 
-    var to_player = global_position - planet_center
-    var normal = to_player.normalized()
-
-    global_position = planet_center + normal * (planet_radius + player_height)
-
-    rotation = normal.angle() + PI / 2
-
-    var tangent = Vector2(normal.y, -normal.x) if facing_left else Vector2(-normal.y, normal.x)
-
-    global_position += tangent * Globals.player_speed * delta
+    movement(delta)
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
     if area.is_in_group("enemies"):
@@ -64,3 +54,12 @@ func die() -> void:
 
     position.x = 600
     position.y = 125
+
+func movement(delta) -> void:
+    var to_player = global_position - planet_center
+    var normal = to_player.normalized()
+
+    global_position = planet_center + normal * (planet_radius + player_height)
+    rotation = normal.angle() + PI / 2
+    var tangent = Vector2(normal.y, -normal.x) if facing_left else Vector2(-normal.y, normal.x)
+    global_position += tangent * Globals.player_speed * delta
