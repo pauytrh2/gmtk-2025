@@ -61,6 +61,6 @@ func die() -> void:
     Globals.player_speed = 200
     Globals.score = 0
     score_label.text = str(Globals.score)
-    
+
     position.x = 600
     position.y = 125

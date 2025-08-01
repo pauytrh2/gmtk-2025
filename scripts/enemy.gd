@@ -16,7 +16,7 @@ func _ready() -> void:
     global_position = planet_center + normal * (planet_radius + enemy_height)
 
     rotation = normal.angle() + PI / 2
-    
+
 func die() -> void:
     emit_signal("killed")
     queue_free()

@@ -10,9 +10,9 @@ func _ready() -> void:
 func _on_enemy_killed() -> void:
     Globals.increase_score(1)
     Globals.increase_player_speed(5)
-    
+
     score_label.text = str(Globals.score)
-    
+
     spawn_enemy()
 
 func spawn_enemy() -> void:
