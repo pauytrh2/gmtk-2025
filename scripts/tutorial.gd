@@ -4,6 +4,9 @@ func _ready() -> void:
     hide()
 
 func _on_player_enemy_close(had_passed_tutorial: bool) -> void:
+    if !Engine.time_scale == 1:
+        return
+
     if had_passed_tutorial:
         Engine.time_scale = 0.9
     else:
