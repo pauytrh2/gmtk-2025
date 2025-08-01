@@ -1,34 +1,34 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxotahscg6l3b"]
 
-[ext_resource type="Script" uid="uid://b1y51wb1r37bo" path="res://scripts/enemy.gd" id="1_f87vc"]
-[ext_resource type="Texture2D" uid="uid://c7f68aj7lryb1" path="res://assets/slime.png" id="2_f87vc"]
+[ext_resource type="Script" uid="uid://b1y51wb1r37bo" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://c7f68aj7lryb1" path="res://assets/slime.png" id="2_4ra3w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yvcfn"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulb22"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1e552"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgurf"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqmod"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqle"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pw261"]
-atlas = ExtResource("2_f87vc")
+atlas = ExtResource("2_4ra3w")
 region = Rect2(96, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vufel"]
@@ -64,7 +64,7 @@ animations = [{
 radius = 7.07107
 
 [node name="Enemy" type="Area2D"]
-script = ExtResource("1_f87vc")
+script = ExtResource("1_md0e3")
 planet_center = Vector2(600, 325)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

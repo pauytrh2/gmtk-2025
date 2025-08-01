@@ -3,7 +3,7 @@ extends Node
 @onready var score_label: Label = %Score
 @onready var player: CharacterBody2D = %Player
 
-var enemy_scene := preload("res://scene/enemy.tscn")
+var enemy_scene := preload("res://scenes/enemy.tscn")
 
 func _ready() -> void:
     spawn_enemy()
