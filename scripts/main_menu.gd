@@ -3,6 +3,10 @@ extends Control
 @onready var settings: Panel = $Settings
 @onready var main_buttons: VBoxContainer = $MainMenu/MainButtons
 
+func _ready() -> void:
+    main_buttons.show()
+    settings.hide()
+
 func _on_start_pressed() -> void:
     get_tree().change_scene_to_file("res://scenes/main.tscn")
 
