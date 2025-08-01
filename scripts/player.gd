@@ -36,7 +36,8 @@ func slash() -> void:
     is_slashing = true
 
     kill_enemies()
-    await play_attack_animation()
+    if !Engine.time_scale == 0.05:
+        await play_attack_animation()
 
     is_slashing = false
 
