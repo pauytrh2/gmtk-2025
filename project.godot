@@ -21,6 +21,7 @@ Globals="*res://scripts/globals.gd"
 
 [display]
 
+window/size/resizable=false
 window/stretch/aspect="expand"
 
 [input]
