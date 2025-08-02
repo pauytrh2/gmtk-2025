@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://h7usaqgy2jk6"]
+[gd_scene load_steps=16 format=3 uid="uid://h7usaqgy2jk6"]
 
 [ext_resource type="PackedScene" uid="uid://b84cnod4v2105" path="res://scenes/donut.tscn" id="1_itxqv"]
 [ext_resource type="PackedScene" uid="uid://13ypau7ceaf1" path="res://scenes/player.tscn" id="2_v0l8b"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://ugjodhv4yyv7" path="res://scripts/tutorial.gd" id="4_4j5ol"]
 [ext_resource type="Script" uid="uid://bganspvkg2i8m" path="res://scripts/game_manager.gd" id="4_brvut"]
 [ext_resource type="Script" uid="uid://c6be2l2qqmgwn" path="res://scripts/ui.gd" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dv2htjcef1bf4" path="res://assets/background.jpg" id="7_o6xl0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o6xl0"]
+texture = ExtResource("7_o6xl0")
+modulate_color = Color(0.505344, 0.505344, 0.505344, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4j5ol"]
 atlas = ExtResource("4_0ha60")
@@ -62,6 +67,18 @@ shadow_size = 5
 shadow_offset = Vector2(0, 3.5)
 
 [node name="Main" type="Node"]
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG" type="Panel" parent="BG"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_o6xl0")
 
 [node name="Tutorial" type="CanvasLayer" parent="."]
 script = ExtResource("4_4j5ol")
