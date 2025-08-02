@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="GMTK 2025"
+config/name="Loop Around"
+config/description="A game about going around"
+config/version="1.0.0"
 run/main_scene="uid://btptikmuqrtr7"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cm0c8gdrjll8f"
 
 [autoload]
 
