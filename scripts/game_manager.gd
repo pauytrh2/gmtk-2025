@@ -7,8 +7,8 @@ var enemy_scene := preload("res://scenes/enemy.tscn")
 
 func _ready() -> void:
     await get_tree().create_timer(3).timeout
-    if get_tree().paused == false:
-        spawn_enemy()
+    while get_tree().paused: await get_tree().process_frame
+    if get_tree().current_scene.name == "Main": spawn_enemy()
 
 func _on_enemy_killed() -> void:
     Globals.increase_score(1)
