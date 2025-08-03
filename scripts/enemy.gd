@@ -39,6 +39,10 @@ func _ready() -> void:
 
     global_position = spawn_position
     rotation = normal.angle() + PI / 2
+    
+    $AnimatedSprite2D.play("born")
+    await $AnimatedSprite2D.animation_finished
+    $AnimatedSprite2D.play("jump")
 
 func die() -> void:
     emit_signal("killed")
