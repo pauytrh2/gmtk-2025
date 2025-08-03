@@ -16,3 +16,8 @@ func _on_player_enemy_close(had_passed_tutorial: bool) -> void:
 func _on_player_enemy_not_close() -> void:
     Engine.time_scale = 1
     hide()
+
+
+func _on_game_manager_end_tutorial() -> void:
+    Engine.time_scale = 1
+    hide()

@@ -1,5 +1,7 @@
 extends Node
 
+signal end_tutorial
+
 @onready var score_label: Label = %Score
 @onready var player: CharacterBody2D = %Player
 
@@ -11,6 +13,8 @@ func _ready() -> void:
     if get_tree().current_scene.name == "Main": spawn_enemy()
 
 func _on_enemy_killed() -> void:
+    emit_signal("end_tutorial")
+
     Globals.increase_score(1)
     Globals.increase_player_speed(5)
 

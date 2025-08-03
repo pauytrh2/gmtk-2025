@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h7usaqgy2jk6"]
+[gd_scene load_steps=19 format=3 uid="uid://h7usaqgy2jk6"]
 
 [ext_resource type="PackedScene" uid="uid://b84cnod4v2105" path="res://scenes/donut.tscn" id="1_itxqv"]
 [ext_resource type="PackedScene" uid="uid://13ypau7ceaf1" path="res://scenes/player.tscn" id="2_v0l8b"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://c6be2l2qqmgwn" path="res://scripts/ui.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dv2htjcef1bf4" path="res://assets/background.jpg" id="7_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://cfqbdcq6ixqeu" path="res://assets/click.mp3" id="8_tipki"]
+[ext_resource type="AudioStream" uid="uid://caas2bar0ttio" path="res://assets/death.mp3" id="9_85g3d"]
+[ext_resource type="AudioStream" uid="uid://0oa7isevglkp" path="res://assets/slash.mp3" id="10_choun"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o6xl0"]
 texture = ExtResource("7_o6xl0")
@@ -224,8 +226,17 @@ script = ExtResource("4_brvut")
 stream = ExtResource("8_tipki")
 bus = &"SFX"
 
+[node name="SFXPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+bus = &"SFX"
+
+[node name="SFXPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_choun")
+bus = &"SFX"
+
 [connection signal="enemy_close" from="GameObjects/Player" to="Tutorial" method="_on_player_enemy_close"]
 [connection signal="enemy_not_close" from="GameObjects/Player" to="Tutorial" method="_on_player_enemy_not_close"]
 [connection signal="pressed" from="UI/PauseMenu/Buttons/Main Menu" to="UI" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/Buttons/Back" to="UI" method="_on_back_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/Pause" to="UI" method="_on_pause_pressed"]
+[connection signal="end_tutorial" from="GameManager" to="Tutorial" method="_on_game_manager_end_tutorial"]

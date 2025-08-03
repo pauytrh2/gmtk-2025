@@ -42,4 +42,6 @@ func _ready() -> void:
 
 func die() -> void:
     emit_signal("killed")
+    $AnimatedSprite2D.play("die")
+    await $AnimatedSprite2D.animation_finished
     queue_free()

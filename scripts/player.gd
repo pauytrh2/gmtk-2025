@@ -4,6 +4,8 @@ signal enemy_close
 signal enemy_not_close
 
 @onready var score_label: Label = %Score
+@onready var sfx_player: AudioStreamPlayer = $"../../SFXPlayer2"
+@onready var enemy_sfx_player: AudioStreamPlayer = $"../../SFXPlayer3"
 
 @export var planet_center: Vector2
 @export var planet_radius := 120
@@ -35,9 +37,10 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func slash() -> void:
     is_slashing = true
 
-    kill_enemies()
     if !Engine.time_scale == 0.05:
         await play_attack_animation()
+
+    await kill_enemies()
 
     is_slashing = false
 
@@ -49,7 +52,8 @@ func flip() -> void:
 func kill_enemies() -> void:
     for area in $AttackArea.get_overlapping_areas():
         if area.is_in_group("enemies"):
-            area.die()
+            enemy_sfx_player.play()
+            await area.die()
             flip()
 
 func play_attack_animation() -> void:
@@ -58,6 +62,8 @@ func play_attack_animation() -> void:
     $AnimatedSprite2D.play("walk")
 
 func die() -> void:
+    sfx_player.play()
+
     Globals.player_speed = 200
     Globals.score = 0
     score_label.text = str(Globals.score)
