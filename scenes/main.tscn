@@ -222,6 +222,7 @@ script = ExtResource("4_brvut")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_tipki")
+bus = &"SFX"
 
 [connection signal="enemy_close" from="GameObjects/Player" to="Tutorial" method="_on_player_enemy_close"]
 [connection signal="enemy_not_close" from="GameObjects/Player" to="Tutorial" method="_on_player_enemy_not_close"]
